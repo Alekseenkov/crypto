@@ -189,6 +189,14 @@ func (p *poly) Mul(q *poly) poly {
 	rv := pv.Mul(&qv)
 	r := rv.InvTransform()
 	r.m = p.m
+
+	////
+	fmt.Println("pv=", pv)
+	fmt.Println("qv=", qv)
+	fmt.Println("rv=", rv)
+	fmt.Println("r=", r)
+	fmt.Println("r.m=", r.m)
+	///
 	return r
 }
 

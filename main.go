@@ -15,6 +15,6 @@ func main() {
 	//module.InterfaceDiophantine()
 	//module.InterfaceJacobi()
 
-	fmt.Println(bigfft.MulFFT(big.NewInt(-10055096), big.NewInt(699380)))
+	fmt.Println(bigfft.MulFFT(big.NewInt(-79897644433432235), big.NewInt(77886632408082)))
 
 }
