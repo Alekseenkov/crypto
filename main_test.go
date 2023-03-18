@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"main/module"
 	"math/big"
-	"mycrypto/module"
 	"reflect"
 	"testing"
 )
@@ -27,7 +27,7 @@ var testValues = []testValue{
 	{big.NewInt(572), big.NewInt(971), -1},
 }
 
-///////////////////////////////////
+// /////////////////////////////////
 var rez2 = []module.AnswerToEquation{
 	module.NewAnswerToEquation(big.NewInt(2), big.NewInt(7)),
 	module.NewAnswerToEquation(big.NewInt(5), big.NewInt(7)),

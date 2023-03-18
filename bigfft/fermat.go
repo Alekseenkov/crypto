@@ -1,8 +1,8 @@
-package fftmy
+package bigfft
 
-import "math/big"
-
-//. "math/big"
+import (
+	"math/big"
+)
 
 // Arithmetic modulo 2^n+1.
 
@@ -11,7 +11,7 @@ import "math/big"
 // 0-1 last word constraint.
 type fermat nat
 
-// func (n fermat) String() string { return nat(n).String() }
+func (n fermat) String() string { return nat(n).String() }
 
 func (z fermat) norm() {
 	n := len(z) - 1

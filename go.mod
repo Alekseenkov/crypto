@@ -1,3 +1,3 @@
-module mycrypto
+module main
 
 go 1.18

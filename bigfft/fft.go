@@ -1,4 +1,4 @@
-package fftmy
+package bigfft
 
 // Package bigfft implements multiplication of big.Int using FFT.
 //
@@ -6,6 +6,7 @@ package fftmy
 // using integer FFT modulo 2^n+1.
 
 import (
+	"fmt"
 	"math/big"
 	"unsafe"
 )
@@ -25,22 +26,26 @@ func (n nat) String() string {
 //
 // TestCalibrate seems to indicate a threshold of 60kbits on 32-bit
 // arches and 110kbits on 64-bit arches.
-var fftThreshold = 1800
+//var fftThreshold = 1800
 
 // Mul computes the product x*y and returns z.
 // It can be used instead of the Mul method of
 // *big.Int from math/big package.
-//func Mul(x, y *big.Int) *big.Int {
-//	xwords := len(x.Bits())
-//	ywords := len(y.Bits())
-//	if xwords > fftThreshold && ywords > fftThreshold {
-//		return mulFFT(x, y)
-//	}
-//	return new(big.Int).Mul(x, y)
-//}
+// func Mul(x, y *big.Int) *big.Int {
+// 	xwords := len(x.Bits())
+// 	ywords := len(y.Bits())
+// 	if xwords > fftThreshold && ywords > fftThreshold {
+// 		return MulFFT(x, y)
+// 	}
+// 	return new(big.Int).Mul(x, y)
+// }
 
 func MulFFT(x, y *big.Int) *big.Int {
 	var xb, yb nat = x.Bits(), y.Bits()
+	////
+	fmt.Println("xb=", xb)
+	fmt.Println("yb=", yb)
+	///
 	zb := fftmul(xb, yb)
 	z := new(big.Int)
 	z.SetBits(zb)
@@ -58,6 +63,13 @@ func fftmul(x, y nat) nat {
 	xp := polyFromNat(x, k, m)
 	yp := polyFromNat(y, k, m)
 	rp := xp.Mul(&yp)
+	////
+	fmt.Println("k=", k)
+	fmt.Println("m=", m)
+	fmt.Println("xp=", xp)
+	fmt.Println("yp=", yp)
+	fmt.Println("rp=", rp)
+	///
 	return rp.Int()
 }
 
