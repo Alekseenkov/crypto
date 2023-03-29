@@ -15,6 +15,15 @@ func main() {
 	//module.InterfaceDiophantine()
 	//module.InterfaceJacobi()
 
-	fmt.Println(bigfft.MulFFT(big.NewInt(-79897644433432235), big.NewInt(77886632408082)))
+	var str = "3333338888888"
+	var a = big.NewInt(0)
+	a.SetString(str, 10)
+
+	str = ""
+	str = "44444447777777"
+	var b = big.NewInt(0)
+	b.SetString(str, 10)
+
+	fmt.Println(bigfft.Mulmy(a, b))
 
 }

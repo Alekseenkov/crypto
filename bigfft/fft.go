@@ -26,19 +26,19 @@ func (n nat) String() string {
 //
 // TestCalibrate seems to indicate a threshold of 60kbits on 32-bit
 // arches and 110kbits on 64-bit arches.
-//var fftThreshold = 1800
+var fftThreshold = 0 //1800
 
 // Mul computes the product x*y and returns z.
 // It can be used instead of the Mul method of
 // *big.Int from math/big package.
-// func Mul(x, y *big.Int) *big.Int {
-// 	xwords := len(x.Bits())
-// 	ywords := len(y.Bits())
-// 	if xwords > fftThreshold && ywords > fftThreshold {
-// 		return MulFFT(x, y)
-// 	}
-// 	return new(big.Int).Mul(x, y)
-// }
+func Mulmy(x, y *big.Int) *big.Int {
+	xwords := len(x.Bits())
+	ywords := len(y.Bits())
+	if xwords > fftThreshold && ywords > fftThreshold {
+		return MulFFT(x, y)
+	}
+	return new(big.Int).Mul(x, y)
+}
 
 func MulFFT(x, y *big.Int) *big.Int {
 	var xb, yb nat = x.Bits(), y.Bits()
@@ -382,10 +382,24 @@ func (p *polValues) Mul(q *polValues) (r polValues) {
 	r.values = make([]fermat, len(p.values))
 	bits := make([]big.Word, len(p.values)*(n+1))
 	buf := make(fermat, 8*n)
+
+	////
+	fmt.Println("n=", n)
+	fmt.Println("r.k=", r.k)
+	fmt.Println("r.n=", r.n)
+	fmt.Println("for MUL")
+
+	////
 	for i := range r.values {
 		r.values[i] = bits[i*(n+1) : (i+1)*(n+1)]
 		z := buf.Mul(p.values[i], q.values[i])
 		copy(r.values[i], z)
+		////
+		fmt.Println("z=", z)
+		fmt.Println("r.values=", r.values)
+
+		////
+
 	}
 	return
 }
